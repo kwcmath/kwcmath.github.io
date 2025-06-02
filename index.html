@@ -1,17 +1,362 @@
 <!DOCTYPE html>
-<html lang="zh-TW"></html>
+<html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/v4-shims.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <title>kwcmath.github.io</title>
+    <title>Wilson | Personal Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+            color: white;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .section h2 {
+            color: #5a67d8;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+        }
+
+        .about-content {
+            text-align: center;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: transform 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .links-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .link-item:hover {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(10px);
+        }
+
+        .link-icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
+        }
+
+        .link-content h3 {
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .link-content p {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 30px 20px;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>It works !</h1>
+    <div class="container">
+        <header class="fade-in">
+            <div class="profile-img">👋</div>
+            <h1>歡迎來到我的個人頁面</h1>
+            <p class="subtitle">Welcome to My Personal Page</p>
+        </header>
+
+        <main>
+            <!-- 第一個主題：關於我自己 -->
+            <section class="section fade-in">
+                <h2><span class="section-icon">👤</span>關於我</h2>
+                <div class="about-content">
+                    <p>您好！我是一個熱愛學習和創新的人。喜歡探索新技術，並且樂於分享知識和經驗。</p>
+                    <p>在這裡，您可以找到我的各種連結和常用的實用資源。</p>
+
+                    <div class="skills">
+                        <span class="skill-tag">網頁設計</span>
+                        <span class="skill-tag">程式開發</span>
+                        <span class="skill-tag">數據分析</span>
+                        <span class="skill-tag">創意思考</span>
+                        <span class="skill-tag">終身學習</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 第二個主題：網站連結 -->
+            <section class="section fade-in">
+                <h2><span class="section-icon">🌐</span>我的網站連結</h2>
+                <div class="links-grid">
+                    <a href="#" class="link-item">
+                        <div class="link-icon">📝</div>
+                        <div class="link-content">
+                            <h3>個人部落格</h3>
+                            <p>分享技術文章和生活感悟</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="link-item">
+                        <div class="link-icon">💼</div>
+                        <div class="link-content">
+                            <h3>作品集</h3>
+                            <p>展示我的專案和創作</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="link-item">
+                        <div class="link-icon">📧</div>
+                        <div class="link-content">
+                            <h3>聯絡我</h3>
+                            <p>歡迎與我交流合作</p>
+                        </div>
+                    </a>
+
+                    <a href="#" class="link-item">
+                        <div class="link-icon">📱</div>
+                        <div class="link-content">
+                            <h3>社群媒體</h3>
+                            <p>關注我的最新動態</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 第三個主題：常用資源連結 -->
+            <section class="section fade-in">
+                <h2><span class="section-icon">🔗</span>常用資源連結</h2>
+                <div class="links-grid">
+                    <a href="https://github.com" class="link-item" target="_blank">
+                        <div class="link-icon">⚡</div>
+                        <div class="link-content">
+                            <h3>GitHub</h3>
+                            <p>程式碼版本控制平台</p>
+                        </div>
+                    </a>
+
+                    <a href="https://stackoverflow.com" class="link-item" target="_blank">
+                        <div class="link-icon">💡</div>
+                        <div class="link-content">
+                            <h3>Stack Overflow</h3>
+                            <p>程式設計問答社群</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.figma.com" class="link-item" target="_blank">
+                        <div class="link-icon">🎨</div>
+                        <div class="link-content">
+                            <h3>Figma</h3>
+                            <p>協作設計工具</p>
+                        </div>
+                    </a>
+
+                    <a href="https://fonts.google.com" class="link-item" target="_blank">
+                        <div class="link-icon">🔤</div>
+                        <div class="link-content">
+                            <h3>Google Fonts</h3>
+                            <p>免費網頁字體資源</p>
+                        </div>
+                    </a>
+
+                    <a href="https://unsplash.com" class="link-item" target="_blank">
+                        <div class="link-icon">📸</div>
+                        <div class="link-content">
+                            <h3>Unsplash</h3>
+                            <p>高品質免費圖片庫</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.notion.so" class="link-item" target="_blank">
+                        <div class="link-icon">📋</div>
+                        <div class="link-content">
+                            <h3>Notion</h3>
+                            <p>筆記和專案管理工具</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 個人檔案頁面 | 用心設計，用愛分享</p>
+        </footer>
+    </div>
+
+    <script>
+        // 添加滾動動畫效果
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-in forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // 添加連結點擊效果
+        document.querySelectorAll('.link-item').forEach(link => {
+            link.addEventListener('click', function (e) {
+                if (this.getAttribute('href') === '#') {
+                    e.preventDefault();
+                    alert('請設定您的實際連結網址！');
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
