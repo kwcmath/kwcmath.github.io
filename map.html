@@ -979,28 +979,11 @@
 
                 <div id="routeInfo" style="display: none;">
                     <div class="route-info">
-                        <h3 style="color: #333; margin-bottom: 15px; display: flex; align-items: center;">
-                            🛣️ 最佳路線 (時間優先)
-                            <button class="btn-route-select" onclick="showBestRoute()" id="bestRouteBtn">顯示此路線</button>
-                        </h3>
-                        <div class="route-details">
-                            <div class="route-stat">
-                                <div class="label">距離</div>
-                                <div class="value" id="bestDistance">-</div>
-                            </div>
-                            <div class="route-stat">
-                                <div class="label">時間</div>
-                                <div class="value" id="bestDuration">-</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="route-info">
-                        <h3 style="color: #333; margin-bottom: 15px; display: flex; align-items: center;">
+                        <h4 style="color: #333; margin-bottom: 15px; display: flex; align-items: center;">
                             📍 最短路線 (距離優先)
                             <button class="btn-route-select" onclick="showShortestRoute()"
-                                id="shortestRouteBtn">顯示此路線</button>
-                        </h3>
+                                id="shortestRouteBtn">選擇此路線</button>
+                        </h4>
                         <div class="route-details">
                             <div class="route-stat">
                                 <div class="label">距離</div>
@@ -1013,9 +996,25 @@
                         </div>
                     </div>
 
+                    <div class="route-info">
+                        <h4 style="color: #333; margin-bottom: 15px; display: flex; align-items: center;">
+                            🛣️ 最佳路線 (時間優先)
+                            <button class="btn-route-select" onclick="showBestRoute()" id="bestRouteBtn">選擇此路線</button>
+                        </h4>
+                        <div class="route-details">
+                            <div class="route-stat">
+                                <div class="label">距離</div>
+                                <div class="value" id="bestDistance">-</div>
+                            </div>
+                            <div class="route-stat">
+                                <div class="label">時間</div>
+                                <div class="value" id="bestDuration">-</div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="route-comparison-stats" style="display: none;">
-                        <h3>📊 路線比較</h3>
+                        <h4>📊 路線比較</h4>
                         <div class="comparison-stats">
                             <div class="comparison-item">
                                 <span class="comparison-label">距離差異：</span>
