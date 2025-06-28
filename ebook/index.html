@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電子書平台</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- 標頭 -->
+        <div class="header">
+            <div class="logo">📚 電子書平台</div>
+            <div class="nav-buttons">
+                <button class="btn btn-primary" onclick="showSection('home')" id="homeBtn">首頁</button>
+                <button class="btn btn-secondary" onclick="showSection('admin')" id="adminBtn"
+                    style="display: none;">後台管理</button>
+                <button class="btn btn-secondary" onclick="logout()" id="logoutBtn" style="display: none;">登出</button>
+                <button class="btn btn-primary" onclick="showSection('login')" id="loginBtn">登入</button>
+            </div>
+        </div>
+
+        <!-- 登入頁面 -->
+        <div class="section" id="loginSection">
+            <div class="login-form">
+                <h2 style="margin-bottom: 30px; color: #333;">會員登入</h2>
+                <div class="form-group">
+                    <label>帳號</label>
+                    <input type="text" id="username" placeholder="請輸入帳號">
+                </div>
+                <div class="form-group">
+                    <label>密碼</label>
+                    <input type="password" id="password" placeholder="請輸入密碼">
+                </div>
+                <button class="btn btn-primary" onclick="login()" style="width: 100%; margin-top: 20px;">登入</button>
+            </div>
+        </div>
+
+        <!-- 首頁 -->
+        <div class="section active" id="homeSection">
+            <div class="user-info" id="userInfo"></div>
+            <h2 style="margin-bottom: 30px; color: #333;">電子書分類</h2>
+
+            <!-- 搜尋功能 -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="搜尋書名、作者或關鍵字..."
+                        onkeypress="handleSearchKeyPress(event)" oninput="handleSearchInput()">
+                    <button class="search-btn" onclick="performSearch()">🔍</button>
+                    <button class="clear-btn" onclick="clearSearch()" id="clearSearchBtn"
+                        style="display: none;">✕</button>
+                </div>
+                <div class="search-status" id="searchStatus"></div>
+            </div>
+
+            <div class="categories" id="categories">
+                <div class="category-btn active" onclick="selectCategory('all')">全部</div>
+            </div>
+
+            <!-- 排序選項 -->
+            <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                <span style="font-weight: bold; color: #333;">排序方式：</span>
+                <select id="sortOption" onchange="changeSortOrder()"
+                    style="padding: 8px 12px; border: 2px solid #667eea; border-radius: 20px; background: white;">
+                    <option value="default">預設排序</option>
+                    <option value="views_desc">閱覽次數 (高到低)</option>
+                    <option value="views_asc">閱覽次數 (低到高)</option>
+                    <option value="title_asc">書名 (A到Z)</option>
+                    <option value="title_desc">書名 (Z到A)</option>
+                    <option value="author_asc">作者 (A到Z)</option>
+                    <option value="author_desc">作者 (Z到A)</option>
+                </select>
+            </div>
+
+            <div class="ebooks-grid" id="ebooksGrid"></div>
+            <div class="pagination" id="pagination"></div>
+        </div>
+
+        <!-- 後台管理 -->
+        <div class="section" id="adminSection">
+            <h2 style="margin-bottom: 30px; color: #333;">後台管理</h2>
+
+            <!-- 管理選項卡 -->
+            <div style="margin-bottom: 30px;">
+                <button class="btn btn-primary" onclick="showAdminTab('books')" id="booksTabBtn">電子書管理</button>
+                <button class="btn btn-secondary" onclick="showAdminTab('categories')" id="categoriesTabBtn"
+                    style="margin-left: 10px;">分類管理</button>
+            </div>
+
+            <!-- 電子書管理區 -->
+            <div id="booksAdminArea">
+                <div style="margin-bottom: 20px;">
+                    <button class="btn btn-primary" onclick="showAddEbookModal()">新增電子書</button>
+                    <button class="btn btn-secondary" onclick="resetToDefault()"
+                        style="margin-left: 10px;">重置為預設資料</button>
+                    <button class="btn btn-secondary" onclick="exportData()" style="margin-left: 10px;">匯出資料</button>
+                    <button class="btn btn-secondary" onclick="importData()" style="margin-left: 10px;">匯入資料</button>
+                </div>
+
+                <!-- 後台搜尋功能 -->
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="adminSearchInput" placeholder="搜尋書名、作者、分類或關鍵字..."
+                            onkeypress="handleAdminSearchKeyPress(event)" oninput="handleAdminSearchInput()">
+                        <button class="search-btn" onclick="performAdminSearch()">🔍</button>
+                        <button class="clear-btn" onclick="clearAdminSearch()" id="clearAdminSearchBtn"
+                            style="display: none;">✕</button>
+                    </div>
+                    <div class="search-status" id="adminSearchStatus"></div>
+                </div>
+
+                <div class="categories" id="adminCategories">
+                    <div class="category-btn active" onclick="selectAdminCategory('all')">全部</div>
+                </div>
+
+                <!-- 後台排序選項 -->
+                <div style="margin-bottom: 20px; display: flex; align-items: center; gap: 15px;">
+                    <span style="font-weight: bold; color: #333;">排序方式：</span>
+                    <select id="adminSortOption" onchange="changeAdminSortOrder()"
+                        style="padding: 8px 12px; border: 2px solid #667eea; border-radius: 20px; background: white;">
+                        <option value="default">預設排序</option>
+                        <option value="views_desc">閱覽次數 (高到低)</option>
+                        <option value="views_asc">閱覽次數 (低到高)</option>
+                        <option value="title_asc">書名 (A到Z)</option>
+                        <option value="title_desc">書名 (Z到A)</option>
+                        <option value="author_asc">作者 (A到Z)</option>
+                        <option value="author_desc">作者 (Z到A)</option>
+                        <option value="id_asc">ID (小到大)</option>
+                        <option value="id_desc">ID (大到小)</option>
+                    </select>
+                </div>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>封面</th>
+                            <th>書名</th>
+                            <th>作者</th>
+                            <th>分類</th>
+                            <th>權限</th>
+                            <th>閱覽次數</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminTableBody"></tbody>
+                </table>
+                <div class="pagination" id="adminPagination"></div>
+            </div>
+
+            <!-- 分類管理區 -->
+            <div id="categoriesAdminArea" style="display: none;">
+                <div style="margin-bottom: 20px;">
+                    <button class="btn btn-primary" onclick="showAddCategoryModal()">新增分類</button>
+                </div>
+
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>分類名稱</th>
+                            <th>電子書數量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categoriesTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 需要登入提示彈窗 -->
+    <div class="modal" id="loginRequiredModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>需要登入</h3>
+                <span class="close" onclick="closeLoginRequiredModal()">&times;</span>
+            </div>
+            <p style="margin-bottom: 20px;">此電子書需要登入才能觀看，請先登入您的帳號。</p>
+            <div style="display: flex; gap: 10px; justify-content: end;">
+                <button type="button" class="btn btn-secondary" onclick="closeLoginRequiredModal()">取消</button>
+                <button type="button" class="btn btn-primary"
+                    onclick="showSection('login'); closeLoginRequiredModal();">前往登入</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新增/編輯分類彈窗 -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="categoryModalTitle">新增分類</h3>
+                <span class="close" onclick="closeCategoryModal()">&times;</span>
+            </div>
+            <form id="categoryForm" onsubmit="saveCategory(event)">
+                <div class="form-group">
+                    <label>分類名稱</label>
+                    <input type="text" id="categoryName" required placeholder="請輸入分類名稱">
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: end;">
+                    <button type="button" class="btn btn-secondary" onclick="closeCategoryModal()">取消</button>
+                    <button type="submit" class="btn btn-primary">儲存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 新增/編輯電子書彈窗 -->
+    <div class="modal" id="ebookModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">新增電子書</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <form id="ebookForm" onsubmit="saveEbook(event)">
+                <div class="form-group">
+                    <label>書名</label>
+                    <input type="text" id="ebookTitle" required>
+                </div>
+                <div class="form-group">
+                    <label>作者</label>
+                    <input type="text" id="ebookAuthor" required>
+                </div>
+                <div class="form-group">
+                    <label>分類 (可選擇多個)</label>
+                    <div id="categoryCheckboxes" class="category-checkboxes">
+                        <!-- 動態生成分類勾選框 -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>封面照片網址</label>
+                    <input type="url" id="ebookCover" placeholder="https://example.com/cover.jpg">
+                </div>
+                <div class="form-group">
+                    <label>電子書介紹</label>
+                    <textarea id="ebookDescription" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>電子書網址</label>
+                    <input type="url" id="ebookUrl" required placeholder="https://example.com/book.pdf">
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="isPublic" checked>
+                        開放所有人觀看 (不勾選則需要登入才能觀看)
+                    </label>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: end;">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">取消</button>
+                    <button type="submit" class="btn btn-primary">儲存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

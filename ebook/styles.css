@@ -1,0 +1,565 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft JhengHei', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: 2px solid #667eea;
+}
+
+.btn-secondary:hover {
+    background: #667eea;
+    color: white;
+}
+
+.section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.category-btn {
+    padding: 12px 25px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #667eea;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+}
+
+.ebooks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.ebook-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.ebook-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.ebook-card.login-required {
+    border: 2px solid #ffc107;
+    background: linear-gradient(135deg, #fff3cd, #ffffff);
+}
+
+.ebook-card.login-required::before {
+    content: "🔒";
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    color: #856404;
+}
+
+.ebook-cover {
+    width: 120px;
+    height: 160px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 10px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    background-size: cover;
+    background-position: center;
+}
+
+.ebook-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.ebook-categories {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+}
+
+.ebook-category-tag {
+    background: #e9ecef;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+}
+
+.ebook-views {
+    color: #666;
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.page-btn {
+    padding: 8px 15px;
+    border: 2px solid #667eea;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover,
+.page-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.admin-table th {
+    background: #f8f9fa;
+    font-weight: bold;
+}
+
+.admin-table img {
+    width: 50px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-edit {
+    background: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close {
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+}
+
+.close:hover {
+    color: #333;
+}
+
+.user-info {
+    text-align: right;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* 分類多選框樣式 */
+.category-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+.category-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: white;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.category-checkbox:hover {
+    background: #e9ecef;
+}
+
+.category-checkbox input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.category-checkbox label {
+    margin: 0;
+    font-weight: normal;
+    cursor: pointer;
+    flex: 1;
+}
+
+/* 權限狀態標籤 */
+.permission-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.permission-public {
+    background: #d4edda;
+    color: #155724;
+}
+
+.permission-private {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* 勾選框標籤樣式 */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+/* 搜尋功能樣式 */
+.search-container {
+    margin-bottom: 25px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 2px solid #667eea;
+    border-radius: 25px;
+    padding: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: #764ba2;
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    background: transparent;
+    color: #333;
+}
+
+.search-box input::placeholder {
+    color: #999;
+}
+
+.search-btn,
+.clear-btn {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #667eea;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn:hover,
+.clear-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.1);
+}
+
+.clear-btn {
+    color: #dc3545;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.search-status {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    padding: 8px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 15px;
+    display: none;
+}
+
+.search-status.show {
+    display: block;
+}
+
+.search-status.no-results {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.search-status.has-results {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+/* 搜尋結果高亮 */
+.search-highlight {
+    background: linear-gradient(120deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+/* 排序選擇器樣式 */
+#sortOption,
+#adminSortOption {
+    font-family: 'Microsoft JhengHei', sans-serif;
+    color: #333;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+#sortOption:focus,
+#adminSortOption:focus {
+    outline: none;
+    border-color: #764ba2;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+}
+
+#sortOption:hover,
+#adminSortOption:hover {
+    border-color: #764ba2;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .ebooks-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .categories {
+        justify-content: center;
+    }
+
+    .category-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    /* 手機版排序選項調整 */
+    #sortOption,
+    #adminSortOption {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    /* 手機版搜尋框調整 */
+    .search-box input {
+        font-size: 16px;
+        /* 防止 iOS 縮放 */
+    }
+}
